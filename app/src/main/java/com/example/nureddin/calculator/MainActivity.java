@@ -11,6 +11,9 @@ public class MainActivity extends AppCompatActivity {
     float valOne, valTwo, answer;
     boolean inProgress = false;
     boolean secondVal = false;
+    boolean neg = false;
+    int wholeAnswer;
+    float placeHolder;
     private Button one_button;
     private Button two_button;
     private Button three_button;
@@ -286,8 +289,14 @@ public class MainActivity extends AppCompatActivity {
 
                     } else {
                         valTwo = Float.parseFloat((display.getText().toString()));
-                        valOne = calculate(valOne, valTwo, '-');
-                        display.setText(Float.toString(valOne));
+                        valOne = calculate(valOne, valTwo, '+');
+                        if(checkDeci(valOne)){
+                            int wholeAnswer = (int) valOne;
+                            display.setText(Integer.toString(wholeAnswer));
+                        }
+                        else{
+                            display.setText(Float.toString(valOne));
+                        }
                         secondVal = true;
 
                     }
@@ -311,7 +320,13 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         valTwo = Float.parseFloat((display.getText().toString()));
                         valOne = calculate(valOne, valTwo, '*');
-                        display.setText(Float.toString(valOne));
+                        if(checkDeci(valOne)){
+                            int wholeAnswer = (int) valOne;
+                            display.setText(Integer.toString(wholeAnswer));
+                        }
+                        else{
+                            display.setText(Float.toString(valOne));
+                        }
                         secondVal = true;
 
                     }
@@ -335,7 +350,13 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         valTwo = Float.parseFloat((display.getText().toString()));
                         valOne = calculate(valOne, valTwo, '-');
-                        display.setText(Float.toString(valOne));
+                        if(checkDeci(valOne)){
+                            int wholeAnswer = (int) valOne;
+                            display.setText(Integer.toString(wholeAnswer));
+                        }
+                        else{
+                            display.setText(Float.toString(valOne));
+                        }
                         secondVal = true;
 
 
@@ -362,10 +383,31 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         valTwo = Float.parseFloat((display.getText().toString()));
                         valOne = calculate(valOne, valTwo, '/');
-                        display.setText(Float.toString(valOne));
+                        if(checkDeci(valOne)){
+                            int wholeAnswer = (int) valOne;
+                            display.setText(Integer.toString(wholeAnswer));
+                        }
+                        else{
+                            display.setText(Float.toString(valOne));
+                        }
                         secondVal = true;
 
                     }
+                }
+            }
+        });
+
+        pos_neg_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                placeHolder = Float.parseFloat(display.getText().toString());
+                placeHolder = -1 * placeHolder;
+                if(checkDeci(placeHolder)){
+                    int wholeAnswer = (int) placeHolder;
+                    display.setText(Integer.toString(wholeAnswer));
+                }
+                else {
+                    display.setText(Float.toString(placeHolder));
                 }
             }
         });
@@ -394,11 +436,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(add){
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    answer = calculate(valOne,valTwo,'+');
-                    display.setText(Float.toString(answer));
                     add = false;
                     inProgress = false;
+                    valTwo = Float.parseFloat((display.getText().toString()));
+                    answer = calculate(valOne,valTwo,'+');
+                    if(checkDeci(answer)){
+                        int wholeAnswer = (int) answer;
+                        display.setText(Integer.toString(wholeAnswer));
+                    }
+                    else{
+                        display.setText(Float.toString(answer));
+                    }
+
                 }
                 if(sub){
                     valTwo = Float.parseFloat((display.getText().toString()));
@@ -406,6 +455,13 @@ public class MainActivity extends AppCompatActivity {
                     display.setText(Float.toString(answer));
                     sub = false;
                     inProgress = false;
+                    if(checkDeci(answer)){
+                        int wholeAnswer = (int) answer;
+                        display.setText(Integer.toString(wholeAnswer));
+                    }
+                    else{
+                        display.setText(Float.toString(answer));
+                    }
 
                 }
                 if(multi){
@@ -414,6 +470,13 @@ public class MainActivity extends AppCompatActivity {
                     display.setText(Float.toString(answer));
                     multi = false;
                     inProgress = false;
+                    if(checkDeci(answer)){
+                        int wholeAnswer = (int) answer;
+                        display.setText(Integer.toString(wholeAnswer));
+                    }
+                    else{
+                        display.setText(Float.toString(answer));
+                    }
 
                 }
                 if(div){
@@ -422,6 +485,13 @@ public class MainActivity extends AppCompatActivity {
                     display.setText(Float.toString(answer));
                     div = false;
                     inProgress = false;
+                    if(checkDeci(answer)){
+                        int wholeAnswer = (int) answer;
+                        display.setText(Integer.toString(wholeAnswer));
+                    }
+                    else{
+                        display.setText(Float.toString(answer));
+                    }
 
                 }
             }
@@ -445,5 +515,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return answer;
+    }
+
+    private boolean checkDeci(float answer){
+        if(answer % 1 == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
