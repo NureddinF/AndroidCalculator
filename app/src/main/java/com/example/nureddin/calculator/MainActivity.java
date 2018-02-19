@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     boolean inProgress = false;
     boolean secondVal = false;
     boolean neg = false;
+    char operand;
     int wholeAnswer;
     float placeHolder;
     private Button one_button;
@@ -277,29 +278,23 @@ public class MainActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sub || multi || div) {
-
-                }else {
-                    add_button.setBackgroundColor(Color.GRAY);
-                    if (!inProgress) {
-                        valOne = Float.parseFloat(display.getText().toString());
-                        add = true;
-                        inProgress = true;
-                        secondVal = true;
-
+                add_button.setBackgroundColor(Color.GRAY);
+                if (!inProgress) {
+                    valOne = Float.parseFloat(display.getText().toString());
+                    operand = '+';
+                    inProgress = true;
+                    secondVal = true;
+                } else {
+                    valTwo = Float.parseFloat((display.getText().toString()));
+                    valOne = calculate(valOne, valTwo, operand);
+                    operand = '+';
+                    if (checkDeci(valOne)) {
+                        int wholeAnswer = (int) valOne;
+                        display.setText(Integer.toString(wholeAnswer));
                     } else {
-                        valTwo = Float.parseFloat((display.getText().toString()));
-                        valOne = calculate(valOne, valTwo, '+');
-                        if(checkDeci(valOne)){
-                            int wholeAnswer = (int) valOne;
-                            display.setText(Integer.toString(wholeAnswer));
-                        }
-                        else{
-                            display.setText(Float.toString(valOne));
-                        }
-                        secondVal = true;
-
+                        display.setText(Float.toString(valOne));
                     }
+                    secondVal = true;
                 }
             }
         });
@@ -307,29 +302,26 @@ public class MainActivity extends AppCompatActivity {
         multi_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(add || sub || div){
+                multi_button.setBackgroundColor(Color.GRAY);
+                if (!inProgress) {
+                    valOne = Float.parseFloat(display.getText().toString());
+                    operand = '*';
+                    inProgress = true;
+                    secondVal = true;
 
-                }else {
-                    multi_button.setBackgroundColor(Color.GRAY);
-                    if (!inProgress) {
-                        valOne = Float.parseFloat(display.getText().toString());
-                        multi = true;
-                        inProgress = true;
-                        secondVal = true;
-
-                    } else {
-                        valTwo = Float.parseFloat((display.getText().toString()));
-                        valOne = calculate(valOne, valTwo, '*');
-                        if(checkDeci(valOne)){
-                            int wholeAnswer = (int) valOne;
-                            display.setText(Integer.toString(wholeAnswer));
-                        }
-                        else{
-                            display.setText(Float.toString(valOne));
-                        }
-                        secondVal = true;
-
+                } else {
+                    valTwo = Float.parseFloat((display.getText().toString()));
+//                    equals_button.performClick();
+                    valOne = calculate(valOne, valTwo, operand);
+                    operand = '*';
+                    if(checkDeci(valOne)){
+                        int wholeAnswer = (int) valOne;
+                        display.setText(Integer.toString(wholeAnswer));
                     }
+                    else{
+                        display.setText(Float.toString(valOne));
+                    }
+                    secondVal = true;
                 }
             }
         });
@@ -337,62 +329,48 @@ public class MainActivity extends AppCompatActivity {
         sub_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(add || multi || div){
-
-                }else {
-                    sub_button.setBackgroundColor(Color.GRAY);
-                    if (!inProgress) {
-                        valOne = Float.parseFloat(display.getText().toString());
-                        sub = true;
-                        inProgress = true;
-                        secondVal = true;
-
+                sub_button.setBackgroundColor(Color.GRAY);
+                if (!inProgress) {
+                    valOne = Float.parseFloat(display.getText().toString());
+                    operand = '-';
+                    inProgress = true;
+                    secondVal = true;
+                } else {
+                    valTwo = Float.parseFloat((display.getText().toString()));
+                    valOne = calculate(valOne, valTwo, operand);
+                    operand = '-';
+                    if (checkDeci(valOne)) {
+                        int wholeAnswer = (int) valOne;
+                        display.setText(Integer.toString(wholeAnswer));
                     } else {
-                        valTwo = Float.parseFloat((display.getText().toString()));
-                        valOne = calculate(valOne, valTwo, '-');
-                        if(checkDeci(valOne)){
-                            int wholeAnswer = (int) valOne;
-                            display.setText(Integer.toString(wholeAnswer));
-                        }
-                        else{
-                            display.setText(Float.toString(valOne));
-                        }
-                        secondVal = true;
-
-
+                        display.setText(Float.toString(valOne));
                     }
+                    secondVal = true;
                 }
-
-
             }
         });
 
         div_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(add || multi || sub){
 
-                }else {
-                    div_button.setBackgroundColor(Color.GRAY);
-                    if (!inProgress) {
-                        valOne = Float.parseFloat(display.getText().toString());
-                        div = true;
-                        inProgress = true;
-                        secondVal = true;
-
+                div_button.setBackgroundColor(Color.GRAY);
+                if (!inProgress) {
+                    valOne = Float.parseFloat(display.getText().toString());
+                    operand = '/';
+                    inProgress = true;
+                    secondVal = true;
+                } else {
+                    valTwo = Float.parseFloat((display.getText().toString()));
+                    valOne = calculate(valOne, valTwo, operand);
+                    operand = '/';
+                    if (checkDeci(valOne)) {
+                        int wholeAnswer = (int) valOne;
+                        display.setText(Integer.toString(wholeAnswer));
                     } else {
-                        valTwo = Float.parseFloat((display.getText().toString()));
-                        valOne = calculate(valOne, valTwo, '/');
-                        if(checkDeci(valOne)){
-                            int wholeAnswer = (int) valOne;
-                            display.setText(Integer.toString(wholeAnswer));
-                        }
-                        else{
-                            display.setText(Float.toString(valOne));
-                        }
-                        secondVal = true;
-
+                        display.setText(Float.toString(valOne));
                     }
+                    secondVal = true;
                 }
             }
         });
@@ -422,6 +400,9 @@ public class MainActivity extends AppCompatActivity {
                 display.setText("0");
                 valOne = 0;
                 valTwo = 0;
+                operand = ' ';
+                inProgress = false;
+                secondVal = false;
             }
         });
 
@@ -435,64 +416,15 @@ public class MainActivity extends AppCompatActivity {
         equals_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(add){
-                    add = false;
-                    inProgress = false;
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    answer = calculate(valOne,valTwo,'+');
-                    if(checkDeci(answer)){
-                        int wholeAnswer = (int) answer;
-                        display.setText(Integer.toString(wholeAnswer));
-                    }
-                    else{
-                        display.setText(Float.toString(answer));
-                    }
-
+                valTwo = Float.parseFloat(display.getText().toString());
+                answer = calculate(valOne,valTwo,operand);
+                inProgress = false;
+                if(checkDeci(answer)){
+                    int wholeAnswer = (int) answer;
+                    display.setText(Integer.toString(wholeAnswer));
                 }
-                if(sub){
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    answer = calculate(valOne,valTwo,'-');
+                else{
                     display.setText(Float.toString(answer));
-                    sub = false;
-                    inProgress = false;
-                    if(checkDeci(answer)){
-                        int wholeAnswer = (int) answer;
-                        display.setText(Integer.toString(wholeAnswer));
-                    }
-                    else{
-                        display.setText(Float.toString(answer));
-                    }
-
-                }
-                if(multi){
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    answer = calculate(valOne,valTwo,'*');
-                    display.setText(Float.toString(answer));
-                    multi = false;
-                    inProgress = false;
-                    if(checkDeci(answer)){
-                        int wholeAnswer = (int) answer;
-                        display.setText(Integer.toString(wholeAnswer));
-                    }
-                    else{
-                        display.setText(Float.toString(answer));
-                    }
-
-                }
-                if(div){
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    answer = calculate(valOne,valTwo,'/');
-                    display.setText(Float.toString(answer));
-                    div = false;
-                    inProgress = false;
-                    if(checkDeci(answer)){
-                        int wholeAnswer = (int) answer;
-                        display.setText(Integer.toString(wholeAnswer));
-                    }
-                    else{
-                        display.setText(Float.toString(answer));
-                    }
-
                 }
             }
         });

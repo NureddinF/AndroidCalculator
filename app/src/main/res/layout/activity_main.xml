@@ -22,7 +22,8 @@
             android:background="@color/colorWhite"
             android:text="0"
             android:textAlignment="textEnd"
-            android:textSize="65sp"/>
+            android:textSize="65sp"
+            android:ellipsize="end"/>
 
     </LinearLayout>
 
