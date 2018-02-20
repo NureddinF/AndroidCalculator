@@ -38,11 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView display;
 
-    private Boolean add = false;
-    private Boolean sub = false;
-    private Boolean multi = false;
-    private Boolean div = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -275,10 +270,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        deci_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add_button.setBackgroundColor(Color.YELLOW);
+                div_button.setBackgroundColor(Color.YELLOW);
+                multi_button.setBackgroundColor(Color.YELLOW);
+                sub_button.setBackgroundColor(Color.YELLOW);
+                if(secondVal){
+                    display.setText("0.");
+                    secondVal = false;
+                }
+                else{
+                    display.setText(display.getText()+".");
+                }
+            }
+        });
+
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 add_button.setBackgroundColor(Color.GRAY);
+                div_button.setBackgroundColor(Color.YELLOW);
+                sub_button.setBackgroundColor(Color.YELLOW);
+                multi_button.setBackgroundColor(Color.YELLOW);
                 if (!inProgress) {
                     valOne = Float.parseFloat(display.getText().toString());
                     operand = '+';
@@ -303,6 +318,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 multi_button.setBackgroundColor(Color.GRAY);
+                div_button.setBackgroundColor(Color.YELLOW);
+                add_button.setBackgroundColor(Color.YELLOW);
+                sub_button.setBackgroundColor(Color.YELLOW);
                 if (!inProgress) {
                     valOne = Float.parseFloat(display.getText().toString());
                     operand = '*';
@@ -311,7 +329,6 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     valTwo = Float.parseFloat((display.getText().toString()));
-//                    equals_button.performClick();
                     valOne = calculate(valOne, valTwo, operand);
                     operand = '*';
                     if(checkDeci(valOne)){
@@ -330,6 +347,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sub_button.setBackgroundColor(Color.GRAY);
+                div_button.setBackgroundColor(Color.YELLOW);
+                add_button.setBackgroundColor(Color.YELLOW);
+                multi_button.setBackgroundColor(Color.YELLOW);
                 if (!inProgress) {
                     valOne = Float.parseFloat(display.getText().toString());
                     operand = '-';
@@ -353,8 +373,11 @@ public class MainActivity extends AppCompatActivity {
         div_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 div_button.setBackgroundColor(Color.GRAY);
+                add_button.setBackgroundColor(Color.YELLOW);
+                sub_button.setBackgroundColor(Color.YELLOW);
+                multi_button.setBackgroundColor(Color.YELLOW);
+
                 if (!inProgress) {
                     valOne = Float.parseFloat(display.getText().toString());
                     operand = '/';
@@ -375,18 +398,58 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        root_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                div_button.setBackgroundColor(Color.GRAY);
+                add_button.setBackgroundColor(Color.YELLOW);
+                sub_button.setBackgroundColor(Color.YELLOW);
+                multi_button.setBackgroundColor(Color.YELLOW);
+
+                if (!inProgress) {
+                    valOne = Float.parseFloat(display.getText().toString());
+                    operand = '/';
+                    inProgress = true;
+                    secondVal = true;
+                } else {
+                    valTwo = Float.parseFloat((display.getText().toString()));
+                    valOne = calculate(valOne, valTwo, operand);
+                    operand = '^';
+                    if (checkDeci(valOne)) {
+                        int wholeAnswer = (int) valOne;
+                        display.setText(Integer.toString(wholeAnswer));
+                    } else {
+                        display.setText(Float.toString(valOne));
+                    }
+                    secondVal = true;
+                }
+            }
+        });
+
         pos_neg_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 placeHolder = Float.parseFloat(display.getText().toString());
                 placeHolder = -1 * placeHolder;
-                if(checkDeci(placeHolder)){
-                    int wholeAnswer = (int) placeHolder;
-                    display.setText(Integer.toString(wholeAnswer));
+
+                if(display.getText() == "0"){
+                    display.setText("-");
                 }
-                else {
-                    display.setText(Float.toString(placeHolder));
+
+                else if(secondVal){
+                    display.setText("-");
+                    secondVal = false;
                 }
+
+                else{
+                    if(checkDeci(placeHolder)) {
+                        int wholeAnswer = (int) placeHolder;
+                        display.setText(Integer.toString(wholeAnswer));
+                    } else {
+                        display.setText(Float.toString(placeHolder));
+                    }
+                }
+
             }
         });
 
@@ -416,9 +479,21 @@ public class MainActivity extends AppCompatActivity {
         equals_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                add_button.setBackgroundColor(Color.YELLOW);
+                div_button.setBackgroundColor(Color.YELLOW);
+                multi_button.setBackgroundColor(Color.YELLOW);
+                sub_button.setBackgroundColor(Color.YELLOW);
                 valTwo = Float.parseFloat(display.getText().toString());
                 answer = calculate(valOne,valTwo,operand);
+                if(operand == '-' && secondVal){
+                    answer = calculate(valTwo,valOne,operand);
+                }
+                if(operand == '/' && secondVal){
+                    answer = calculate(valTwo,valOne,operand);
+                }
                 inProgress = false;
+                secondVal = true;
+
                 if(checkDeci(answer)){
                     int wholeAnswer = (int) answer;
                     display.setText(Integer.toString(wholeAnswer));
