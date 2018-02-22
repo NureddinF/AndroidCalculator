@@ -8,10 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    float valOne, valTwo, answer;
+    int primary;
+    String valOne, valTwo,rootVal;
+    float answer;
     boolean inProgress = false;
     boolean secondVal = false;
-    boolean neg = false;
+    boolean root = false;
+    boolean equals = false;
     char operand;
     int wholeAnswer;
     float placeHolder;
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        http://tekeye.uk/android/examples/how-to-set-a-color-in-android
+        primary = getResources().getColor(R.color.colorPrimary);
+
         one_button = findViewById(R.id.one);
         two_button = findViewById(R.id.two);
         three_button = findViewById(R.id.three);
@@ -70,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         zero_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
+                root_button.setBackgroundColor(primary);
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
@@ -90,10 +98,13 @@ public class MainActivity extends AppCompatActivity {
         one_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("1");
                 }
@@ -111,10 +122,13 @@ public class MainActivity extends AppCompatActivity {
         two_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("2");
                 }
@@ -132,10 +146,13 @@ public class MainActivity extends AppCompatActivity {
         three_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("3");
                 }
@@ -152,10 +169,13 @@ public class MainActivity extends AppCompatActivity {
         four_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("4");
                 }
@@ -172,10 +192,13 @@ public class MainActivity extends AppCompatActivity {
         five_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("5");
                 }
@@ -192,10 +215,13 @@ public class MainActivity extends AppCompatActivity {
         six_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("6");
                 }
@@ -213,10 +239,13 @@ public class MainActivity extends AppCompatActivity {
         seven_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("7");
                 }
@@ -233,10 +262,13 @@ public class MainActivity extends AppCompatActivity {
         eight_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("8");
                 }
@@ -253,10 +285,13 @@ public class MainActivity extends AppCompatActivity {
         nine_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(display.getText() == "0"){
                     display.setText("9");
                 }
@@ -273,10 +308,13 @@ public class MainActivity extends AppCompatActivity {
         deci_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.YELLOW);
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if(secondVal){
                     display.setText("0.");
                     secondVal = false;
@@ -290,24 +328,32 @@ public class MainActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 add_button.setBackgroundColor(Color.GRAY);
                 div_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if (!inProgress) {
-                    valOne = Float.parseFloat(display.getText().toString());
+                    valOne = display.getText().toString();
                     operand = '+';
                     inProgress = true;
                     secondVal = true;
-                } else {
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    valOne = calculate(valOne, valTwo, operand);
+                }
+//                else if(root){
+//                    rootVal = Float.parseFloat(display.getText().toString());
+//                }
+                else if(inProgress){
+                    valTwo = display.getText().toString();
+                    valOne = Float.toString(calculate(valOne, valTwo, operand));
+                    answer = Float.parseFloat(valOne);
                     operand = '+';
-                    if (checkDeci(valOne)) {
-                        int wholeAnswer = (int) valOne;
+                    if (checkDeci(answer)) {
+                        int wholeAnswer = (int) answer;
                         display.setText(Integer.toString(wholeAnswer));
                     } else {
-                        display.setText(Float.toString(valOne));
+                        display.setText(Float.toString(answer));
                     }
                     secondVal = true;
                 }
@@ -317,26 +363,42 @@ public class MainActivity extends AppCompatActivity {
         multi_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 multi_button.setBackgroundColor(Color.GRAY);
                 div_button.setBackgroundColor(Color.YELLOW);
                 add_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if (!inProgress) {
-                    valOne = Float.parseFloat(display.getText().toString());
+                    valOne = display.getText().toString();
                     operand = '*';
                     inProgress = true;
                     secondVal = true;
 
-                } else {
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    valOne = calculate(valOne, valTwo, operand);
+                }
+//                else if(root){
+//                    rootVal = Float.parseFloat(display.getText().toString());
+//                    answer =(float) root(rootVal);
+////                    display.setText(Double.toString(answer));
+//                    if(!inProgress) {
+//                        valOne = Float.toString(answer);
+//                    } else{
+//                        valTwo = Float.toString(answer);
+//                    }
+//                    root = false;
+//                }
+                else if(inProgress) {
+                    valTwo = display.getText().toString();
+                    valOne = Float.toString(calculate(valOne, valTwo, operand));
+                    answer = Float.parseFloat(valOne);
                     operand = '*';
-                    if(checkDeci(valOne)){
-                        int wholeAnswer = (int) valOne;
+                    if(checkDeci(answer)){
+                        int wholeAnswer = (int) answer;
                         display.setText(Integer.toString(wholeAnswer));
                     }
                     else{
-                        display.setText(Float.toString(valOne));
+                        display.setText(Float.toString(answer));
                     }
                     secondVal = true;
                 }
@@ -346,24 +408,29 @@ public class MainActivity extends AppCompatActivity {
         sub_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 sub_button.setBackgroundColor(Color.GRAY);
                 div_button.setBackgroundColor(Color.YELLOW);
                 add_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
                 if (!inProgress) {
-                    valOne = Float.parseFloat(display.getText().toString());
+                    valOne = display.getText().toString();
                     operand = '-';
                     inProgress = true;
                     secondVal = true;
-                } else {
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    valOne = calculate(valOne, valTwo, operand);
+                }
+                else if(inProgress) {
+                    valTwo = display.getText().toString();
+                    valOne = Float.toString(calculate(valOne, valTwo, operand));
+                    answer = Float.parseFloat(valOne);
                     operand = '-';
-                    if (checkDeci(valOne)) {
-                        int wholeAnswer = (int) valOne;
+                    if (checkDeci(answer)) {
+                        wholeAnswer = (int) answer;
                         display.setText(Integer.toString(wholeAnswer));
                     } else {
-                        display.setText(Float.toString(valOne));
+                        display.setText(Float.toString(answer));
                     }
                     secondVal = true;
                 }
@@ -373,25 +440,29 @@ public class MainActivity extends AppCompatActivity {
         div_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 div_button.setBackgroundColor(Color.GRAY);
                 add_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
+
 
                 if (!inProgress) {
-                    valOne = Float.parseFloat(display.getText().toString());
+                    valOne = display.getText().toString();
                     operand = '/';
                     inProgress = true;
                     secondVal = true;
-                } else {
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    valOne = calculate(valOne, valTwo, operand);
+                } else if(inProgress) {
+                    valTwo = display.getText().toString();
+                    valOne = Float.toString(calculate(valOne, valTwo, operand));
+                    answer = Float.parseFloat(valOne);
                     operand = '/';
-                    if (checkDeci(valOne)) {
-                        int wholeAnswer = (int) valOne;
+                    if (checkDeci(answer)) {
+                        wholeAnswer = (int) answer;
                         display.setText(Integer.toString(wholeAnswer));
                     } else {
-                        display.setText(Float.toString(valOne));
+                        display.setText(Float.toString(answer));
                     }
                     secondVal = true;
                 }
@@ -401,34 +472,31 @@ public class MainActivity extends AppCompatActivity {
         root_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                div_button.setBackgroundColor(Color.GRAY);
+                equals = false;
+                root_button.setBackgroundColor(Color.GRAY);
+                div_button.setBackgroundColor(Color.YELLOW);
                 add_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
-
-                if (!inProgress) {
-                    valOne = Float.parseFloat(display.getText().toString());
-                    operand = '/';
-                    inProgress = true;
-                    secondVal = true;
-                } else {
-                    valTwo = Float.parseFloat((display.getText().toString()));
-                    valOne = calculate(valOne, valTwo, operand);
-                    operand = '^';
-                    if (checkDeci(valOne)) {
-                        int wholeAnswer = (int) valOne;
-                        display.setText(Integer.toString(wholeAnswer));
-                    } else {
-                        display.setText(Float.toString(valOne));
-                    }
-                    secondVal = true;
+                root = true;
+                if(display.getText() == "0"){
+                    display.setText("√");
                 }
+                else if(secondVal){
+                    display.setText("√");
+                    secondVal = false;
+                }
+                else{
+                    display.setText(display.getText()+"√");
+                }
+
             }
         });
 
         pos_neg_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                equals = false;
                 placeHolder = Float.parseFloat(display.getText().toString());
                 placeHolder = -1 * placeHolder;
 
@@ -443,7 +511,7 @@ public class MainActivity extends AppCompatActivity {
 
                 else{
                     if(checkDeci(placeHolder)) {
-                        int wholeAnswer = (int) placeHolder;
+                        wholeAnswer = (int) placeHolder;
                         display.setText(Integer.toString(wholeAnswer));
                     } else {
                         display.setText(Float.toString(placeHolder));
@@ -460,12 +528,14 @@ public class MainActivity extends AppCompatActivity {
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
+                root_button.setBackgroundColor(primary);
                 display.setText("0");
-                valOne = 0;
-                valTwo = 0;
+                valOne = "";
+                valTwo = "";
                 operand = ' ';
                 inProgress = false;
                 secondVal = false;
+                equals = false;
             }
         });
 
@@ -483,44 +553,127 @@ public class MainActivity extends AppCompatActivity {
                 div_button.setBackgroundColor(Color.YELLOW);
                 multi_button.setBackgroundColor(Color.YELLOW);
                 sub_button.setBackgroundColor(Color.YELLOW);
-                valTwo = Float.parseFloat(display.getText().toString());
-                answer = calculate(valOne,valTwo,operand);
-                if(operand == '-' && secondVal){
-                    answer = calculate(valTwo,valOne,operand);
-                }
-                if(operand == '/' && secondVal){
-                    answer = calculate(valTwo,valOne,operand);
-                }
+                root_button.setBackgroundColor(primary);
+
+                valTwo = display.getText().toString();
                 inProgress = false;
-                secondVal = true;
+//                answer = calculate(valOne,valTwo,operand);
+                if(operand == '-' && equals){
+                    answer = calculate(valTwo,valOne,operand);
+                }
+                if(operand == '/' && equals){
+                    answer = calculate(valTwo,valOne,operand);
+                }
+//                if(root && secondVal){
+//                    rootVal = display.getText().toString();
+//                    answer =(float) root(rootVal);
+//                    display.setText(Double.toString(answer));
+//                    root = false;
+//
+//                }
+                else{
+
+                    answer = calculate(valOne,valTwo,operand);
+//                    display.setText(Float.toString(answer));
+                }
+
+                display.setText(Float.toString(answer));
 
                 if(checkDeci(answer)){
-                    int wholeAnswer = (int) answer;
+                    wholeAnswer = (int) answer;
                     display.setText(Integer.toString(wholeAnswer));
                 }
+
                 else{
                     display.setText(Float.toString(answer));
                 }
+                equals = true;
+                secondVal = true;
+
             }
         });
 
     }
 
-    private float calculate(float left,float right, char operand){
+    private float calculate(String left,String right, char operand){
         float answer = 0;
+        float num1 = 0;
+        float num2 = 0;
         if(operand == '+'){
-            answer = left + right;
+            if (left.contains("√")) {
+                num1 = (float) root(left);
+            }
+            if (right.contains("√")) {
+                num2 = (float) root(right);
+
+            }
+            if(!right.contains("√") && !left.contains("√")){
+                num1 = Float.parseFloat(left);
+                num2 = Float.parseFloat(right);
+            }
+            if(num1 == 0){
+                num1 = Float.parseFloat(left);
+            }
+            if(num2 == 0){
+                num2 = Float.parseFloat(right);
+            }
+            answer = num1 + num2;
         }
         if(operand == '-'){
-            answer = left - right;
+            if (left.contains("√")) {
+                num1 = (float) root(left);
+            }
+            if (right.contains("√")) {
+                num2 = (float) root(right);
+            }
+            else {
+                num1 = Float.parseFloat(left);
+                num2 = Float.parseFloat(right);
+
+            }
+            answer = num1 - num2;
         }
         if(operand == '*'){
-            answer = left * right;
+            if (left.contains("√")) {
+                num1 = (float) root(left);
+            }
+            if (right.contains("√")) {
+                num2 = (float) root(right);
+            }
+            else {
+                num1 = Float.parseFloat(left);
+                num2 = Float.parseFloat(right);
+
+            }
+            answer = num1 * num2;
         }
         if(operand == '/'){
-            answer = left / right;
+            if (left.contains("√")) {
+                num1 = (float) root(left);
+            }
+            if (right.contains("√")) {
+                num2 = (float) root(right);
+            }
+            else {
+                num1 = Float.parseFloat(left);
+                num2 = Float.parseFloat(right);
+
+            }
+            answer = num1 / num2;
         }
 
+        return answer;
+    }
+
+    private double root(String num){
+        String temp = "";
+        for(int i = 1; i <= num.length()-1; i++) {
+            temp += num.charAt(i);
+
+        }
+//        display.setText(temp);
+        double val = Float.parseFloat(temp);
+        double answer = Math.sqrt(val);
         return answer;
     }
 
